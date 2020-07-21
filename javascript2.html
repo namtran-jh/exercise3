@@ -1,0 +1,90 @@
+<!--  Ex 2: Given an array of integers, find the most repetitions and repetitions. 
+    If multiple numbers have the same maximum number of iterations, export all of them. Maximum 3 rounds, not nested. -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles.css" rel="stylesheet" type="text/css">
+    <title>Javascript 2</title>
+</head>
+
+<body>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <div>
+        <a href="./javascript1.html">Javascript 1</a>
+        <a href="./javascript3.html">Javascript 3</a>
+    </div>
+
+    <script>
+        // Case 1: Don't have same maximum number of iterations
+        const arr1 = [1, 2, 2, 3, 4, 4, 4, 5, 6];
+        var result1 = 0;
+        var count1 = 0;
+
+        var tmp1 = [];
+        arr1.forEach((value, index, array) => {
+            var tmpcnt = 0;
+            if (tmp1.indexOf(value) === -1) {
+                for (var i = 0; i < arr1.length; i++) {
+                    if (value === arr1[i]) tmpcnt++;
+                }
+
+                tmp1.push({
+                    num: value,
+                    count: tmpcnt
+                });
+            }
+        })
+
+        var max = tmp1[0];
+        for (var i = 0; i < tmp1.length; i++) {
+            if (tmp1[i].count > max.count) {
+                max = tmp1[i];
+            }
+        }
+
+        result1 = max.num;
+        count1 = max.count;
+
+        document.getElementById("demo1").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result1 + " --- The repititions: " + count1;
+
+        // Case 2: Have same maximum number of iterations
+        const arr2 = [1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 7, 7, 7];
+        var result2 = [];
+        var count2 = 0;
+
+        var tmp2 = [];
+        arr2.forEach((value, index, array) => {
+            var tmpcnt = 0;
+            if (tmp2.indexOf(value) === -1) {
+                for (var i = 0; i < arr2.length; i++) {
+                    if (value === arr2[i]) tmpcnt++;
+                }
+
+                tmp2.push({
+                    num: value,
+                    count: tmpcnt
+                });
+            }
+        })
+
+        result2[0] = tmp2[0];
+        for (var i = 1; i < tmp2.length; i++) {
+            if (tmp2[i].count === result2[0].count && tmp2[i].num !== result2[0].num) {
+                result2.push(tmp2[i]);
+            }
+            if (tmp2[i].count > result2[0].count) {
+                result2.splice(0);
+                result2.push(tmp2[i]);
+            }
+        }
+
+        document.getElementById("demo2").innerHTML = "The most repititive number: " + result2 + " --- The repititions: " + result2[0].count;
+    </script>
+</body>
+
+</html>

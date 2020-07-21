@@ -1,0 +1,76 @@
+<!-- "Ex 1: Given an array of integers, removing duplicate elements and creating an array whose elements are unique.
+    (Eg: [1,2,2,3,4,4,4,5,6] => [1,2,3,4,5,6]). Find 3-4 ways to solve this.-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./styles.css" rel="stylesheet" type="text/css">
+    <title>Javascript 1</title>
+</head>
+
+<body>
+    <p id="demo1"></p>
+    <p id="demo2"></p>
+    <p id="demo3"></p>
+    <p id="demo4"></p>
+
+    <div>
+        <a href="./javascript2.html">Javascript 2</a>
+        <a href="./javascript3.html">Javascript 3</a>
+    </div>
+
+    <script>
+        // Solution 1
+        const arr1 = [1, 2, 2, 3, 4, 4, 4, 5, 6];
+        var result1 = arr1.reduce((accumulator, value) => {
+            if (accumulator.indexOf(value) === -1) {
+                accumulator.push(value);
+            }
+            return accumulator;
+        }, [])
+
+        document.getElementById("demo1").innerHTML = "Demo 1 (arr.reduce() with BigO: n): " + result1;
+
+        // Solution 2
+        const arr2 = [1, 2, 2, 3, 4, 4, 4, 5, 6];
+        document.getElementById("demo2").innerHTML = "Demo 2 (use Set prototype object): " + Array.from([...new Set(arr2)]);
+
+        // Solution 3
+        const arr3 = [1, 2, 2, 3, 4, 4, 4, 5, 6];
+        var result2 = [];
+        result2.push(arr3[0]);
+        for (var i = 1; i < arr3.length; i++) {
+            var count = 0;
+            var tmp = arr3[i];
+
+            for (var j = 0; j < result2.length; j++) {
+                if (result2[j] === tmp) count++;
+            }
+
+            if (count === 0) {
+                result2.push(tmp);
+            } else {
+                continue;
+            }
+        }
+
+        document.getElementById("demo3").innerHTML = "Demo 3 (use 2 loops with BigO: n*n): " + result2;
+
+        // Solution 4
+        const arr4 = [1, 2, 2, 3, 4, 4, 4, 5, 6];
+        var result3 = [];
+
+        arr4.forEach((value, index, array) => {
+            if (result3.indexOf(value) === -1) {
+                result3.push(value);
+            }
+        })
+
+        document.getElementById("demo4").innerHTML = "Demo 4 (use forEach() with BigO: 2n): " + result3;
+    </script>
+</body>
+
+</html>
