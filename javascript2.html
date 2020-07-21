@@ -58,32 +58,31 @@
         var count2 = 0;
 
         var tmp2 = [];
-        arr2.forEach((value, index, array) => {
+        arr2.forEach((val) => {
             var tmpcnt = 0;
-            if (tmp2.indexOf(value) === -1) {
-                for (var i = 0; i < arr2.length; i++) {
-                    if (value === arr2[i]) tmpcnt++;
-                }
-
+            for (var i = 0; i < arr2.length; i++) {
+                if (arr2[i] === val)
+                    tmpcnt++;
+            }
+            if (tmpcnt > count2) count2 = tmpcnt;
+            if (tmp2.indexOf(val) === -1) {
                 tmp2.push({
-                    num: value,
+                    num: val,
                     count: tmpcnt
                 });
             }
         })
 
-        result2[0] = tmp2[0];
-        for (var i = 1; i < tmp2.length; i++) {
-            if (tmp2[i].count === result2[0].count && tmp2[i].num !== result2[0].num) {
-                result2.push(tmp2[i]);
-            }
-            if (tmp2[i].count > result2[0].count) {
-                result2.splice(0);
-                result2.push(tmp2[i]);
-            }
-        }
+        var tmp3 = [];
+        tmp2.forEach(val => {
+            if (val.count === count2) tmp3.push(val.num);
+        })
 
-        document.getElementById("demo2").innerHTML = "The most repititive number: " + result2 + " --- The repititions: " + result2[0].count;
+        tmp3.forEach(val => {
+            if (result2.indexOf(val) === -1) result2.push(val);
+        })
+
+        document.getElementById("demo2").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result2 + " --- The repititions: " + count2;
     </script>
 </body>
 

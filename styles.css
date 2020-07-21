@@ -22,8 +22,34 @@ a {
     color: rgb(0, 119, 255);
 }
 
+input {
+    width: 200px;
+    background-color: white;
+    color: red;
+    text-align: center;
+    font-size: 20px;
+    border: 3px solid black;
+    padding: 50px;
+    margin: 20px;
+    font-family: 'Times New Roman', serif;
+}
+
 a:hover {
     text-decoration: none;
     background-color: rgb(0, 119, 255);
     color: white;
 }
+
+#forkQuestionTree {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#question {
+    width: 700px;
+    text-align: justify;
+}
+
+.answer {}
