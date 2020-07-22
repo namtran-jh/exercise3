@@ -53,52 +53,52 @@ var data = [{
     },
     {
         "id": 7,
-        "question": "Ques7",
+        "question": "Who are you",
         "answers": [
-            { "a_id": 1, "answer": "Answer here", "affect": 8 },
-            { "a_id": 2, "answer": "Answer here", "affect": 9 },
-            { "a_id": 3, "answer": "Answer here", "affect": 10 }
+            { "a_id": 1, "answer": "Boy", "affect": 8 },
+            { "a_id": 2, "answer": "Girl", "affect": 9 },
+            { "a_id": 3, "answer": "Something else ahihi", "affect": 10 }
         ]
     },
     {
         "id": 8,
         "question": "Ques8",
         "answers": [
-            { "a_id": 1, "answer": "Answer here", "affect": 2 },
-            { "a_id": 2, "answer": "Answer here", "affect": 4 }
+            { "a_id": 1, "answer": "Answer here is right", "affect": 2 },
+            { "a_id": 2, "answer": "Answer here is wrong", "affect": 4 }
         ]
     },
     {
         "id": 9,
-        "question": "Ques9",
+        "question": "Which song do you prefer to listen right now",
         "answers": [
-            { "a_id": 1, "answer": "Answer here", "affect": 5 },
-            { "a_id": 2, "answer": "Answer here", "affect": 6 },
-            { "a_id": 3, "answer": "Answer here", "affect": 7 }
+            { "a_id": 1, "answer": "Song 1", "affect": 5 },
+            { "a_id": 2, "answer": "Song 2", "affect": 6 },
+            { "a_id": 3, "answer": "Song 3", "affect": 7 }
         ]
     },
     {
         "id": 10,
-        "question": "Ques10",
+        "question": "Which singer do you love the most",
         "answers": [
-            { "a_id": 1, "answer": "Answer here", "affect": 2 },
-            { "a_id": 2, "answer": "Answer here", "affect": 4 }
+            { "a_id": 1, "answer": "K-ATM", "affect": 2 },
+            { "a_id": 2, "answer": "Tùng Mountain", "affect": 4 }
         ]
     },
     {
         "id": 11,
-        "question": "Ques11",
+        "question": "Your IQ?",
         "answers": [
-            { "a_id": 1, "answer": "Answer here", "affect": 3 },
-            { "a_id": 2, "answer": "Answer here", "affect": 9 }
+            { "a_id": 1, "answer": "0", "affect": 3 },
+            { "a_id": 2, "answer": "200", "affect": 9 }
         ]
     },
     {
         "id": 12,
-        "question": "Ques12",
+        "question": "Do you think you are the winner?",
         "answers": [
-            { "a_id": 1, "answer": "Answer here", "affect": 0 },
-            { "a_id": 2, "answer": "Answer here", "affect": 0 }
+            { "a_id": 1, "answer": "No one can beat me", "affect": 0 },
+            { "a_id": 2, "answer": "Absolutely YES !!", "affect": 0 }
         ]
     }
 ]

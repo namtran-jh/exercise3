@@ -51,7 +51,12 @@
             } else {
                 if (val.name === "0") {
                     document.getElementById("question").innerHTML = "No more question, okay ?!?";
-                    document.getElementById("answers").innerHTML = "<p> End game here !!!! </p>";
+                    document.getElementById("answers").innerHTML = '<input type="text" value="End game here !!!!" disabled/>' +
+                        '<input id="answer0" class="answer" type="text" name="1" value="Play again ????" disabled/>';
+
+                    document.getElementById("answer0").onselect = function() {
+                        setQuestion(this)
+                    };
                 } else {
                     for (var i = 0; i < data.length; i++) {
                         if (data[i].id === parseInt(val.name)) {
