@@ -12,77 +12,105 @@
 </head>
 
 <body>
+    <div id="inputArea">
+        <input id="input" type="text" value="" placeholder="Input here..." />
+        <input id="activateJS" type="button" value="Activate" />
+    </div>
+
     <p id="demo1"></p>
     <p id="demo2"></p>
+
     <div>
         <a href="./javascript1.html">Javascript 1</a>
         <a href="./javascript3.html">Javascript 3</a>
     </div>
 
     <script>
-        // Case 1: Don't have same maximum number of iterations
-        const arr1 = [1, 2, 2, 3, 4, 4, 4, 5, 6];
-        var result1 = 0;
-        var count1 = 0;
+        // Get input value
+        var inputValue;
+        var input;
+        document.getElementById("activateJS").onclick = function() {
+            inputValue = document.getElementById("input").value;
+            var getElements = inputValue.split(",");
+            var parseElements = getElements.map(val => {
+                return parseInt(val);
+            })
 
-        var tmp1 = [];
-        arr1.forEach((value, index, array) => {
-            var tmpcnt = 0;
-            if (tmp1.indexOf(value) === -1) {
-                for (var i = 0; i < arr1.length; i++) {
-                    if (value === arr1[i]) tmpcnt++;
-                }
+            input = parseElements.reduce((accumulator, value) => {
+                if (isNaN(value) === false)
+                    accumulator.push(value);
+                return accumulator;
+            }, [])
 
-                tmp1.push({
-                    num: value,
-                    count: tmpcnt
-                });
-            }
-        })
-
-        var max = tmp1[0];
-        for (var i = 0; i < tmp1.length; i++) {
-            if (tmp1[i].count > max.count) {
-                max = tmp1[i];
-            }
+            // console.log(input);
+            runNow(input);
         }
 
-        result1 = max.num;
-        count1 = max.count;
+        function runNow(input) {
+            // Case 1: Don't have same maximum number of iterations
+            const arr1 = JSON.parse(JSON.stringify(input));
+            var result1 = 0;
+            var count1 = 0;
 
-        document.getElementById("demo1").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result1 + " --- The repititions: " + count1;
+            var tmp1 = [];
+            arr1.forEach((value, index, array) => {
+                var tmpcnt = 0;
+                if (tmp1.indexOf(value) === -1) {
+                    for (var i = 0; i < arr1.length; i++) {
+                        if (value === arr1[i]) tmpcnt++;
+                    }
 
-        // Case 2: Have same maximum number of iterations
-        const arr2 = [1, 2, 2, 2, 3, 4, 4, 4, 5, 6, 7, 7, 7];
-        var result2 = [];
-        var count2 = 0;
+                    tmp1.push({
+                        num: value,
+                        count: tmpcnt
+                    });
+                }
+            })
 
-        var tmp2 = [];
-        arr2.forEach((val) => {
-            var tmpcnt = 0;
-            for (var i = 0; i < arr2.length; i++) {
-                if (arr2[i] === val)
-                    tmpcnt++;
+            var max = tmp1[0];
+            for (var i = 0; i < tmp1.length; i++) {
+                if (tmp1[i].count > max.count) {
+                    max = tmp1[i];
+                }
             }
-            if (tmpcnt > count2) count2 = tmpcnt;
-            if (tmp2.indexOf(val) === -1) {
-                tmp2.push({
-                    num: val,
-                    count: tmpcnt
-                });
-            }
-        })
 
-        var tmp3 = [];
-        tmp2.forEach(val => {
-            if (val.count === count2) tmp3.push(val.num);
-        })
+            result1 = max.num;
+            count1 = max.count;
 
-        tmp3.forEach(val => {
-            if (result2.indexOf(val) === -1) result2.push(val);
-        })
+            document.getElementById("demo1").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result1 + " --- The repititions: " + count1;
 
-        document.getElementById("demo2").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result2 + " --- The repititions: " + count2;
+            // Case 2: Have same maximum number of iterations
+            const arr2 = JSON.parse(JSON.stringify(input));
+            var result2 = [];
+            var count2 = 0;
+
+            var tmp2 = [];
+            arr2.forEach((val) => {
+                var tmpcnt = 0;
+                for (var i = 0; i < arr2.length; i++) {
+                    if (arr2[i] === val)
+                        tmpcnt++;
+                }
+                if (tmpcnt > count2) count2 = tmpcnt;
+                if (tmp2.indexOf(val) === -1) {
+                    tmp2.push({
+                        num: val,
+                        count: tmpcnt
+                    });
+                }
+            })
+
+            var tmp3 = [];
+            tmp2.forEach(val => {
+                if (val.count === count2) tmp3.push(val.num);
+            })
+
+            tmp3.forEach(val => {
+                if (result2.indexOf(val) === -1) result2.push(val);
+            })
+
+            document.getElementById("demo2").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result2 + " --- The repititions: " + count2;
+        }
     </script>
 </body>
 
