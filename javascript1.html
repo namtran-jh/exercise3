@@ -29,50 +29,61 @@
 
     <script>
         // Get input value
-        var inputValue;
-        var input;
         document.getElementById("activateJS").onclick = function() {
-            inputValue = document.getElementById("input").value;
-            var getElements = inputValue.split(",");
-            var parseElements = getElements.map(val => {
+            const inputValue = document.getElementById("input").value;
+            const getElements = inputValue.split(",");
+            const parseElements = getElements.map(val => {
                 return parseInt(val);
             })
 
-            input = parseElements.reduce((accumulator, value) => {
+            const input = parseElements.reduce((accumulator, value) => {
                 if (isNaN(value) === false)
                     accumulator.push(value);
                 return accumulator;
             }, [])
 
             // console.log(input);
-            runNow(input);
+            activateFn(input);
         }
 
-        function runNow(input) {
-            // Solution 1
+        function solution1(input) {
             const arr1 = JSON.parse(JSON.stringify(input));
-            var result1 = arr1.reduce((accumulator, value) => {
+            const result1 = arr1.reduce((accumulator, value) => {
                 if (accumulator.indexOf(value) === -1) {
                     accumulator.push(value);
                 }
                 return accumulator;
             }, [])
 
-            document.getElementById("demo1").innerHTML = "Demo 1 (use arr.reduce() with BigO: n): " + result1;
+            document.getElementById("demo1").innerHTML = "Demo 1 (use arr.reduce() with BigO: n*n): " + result1;
+        }
 
-            // Solution 2
+        function solution2(input) {
+            // const arr2 = JSON.parse(JSON.stringify(input));
+            // document.getElementById("demo2").innerHTML = "Demo 2 (use Set prototype object): " + Array.from([...new Set(arr2)]);
+
             const arr2 = JSON.parse(JSON.stringify(input));
-            document.getElementById("demo2").innerHTML = "Demo 2 (use Set prototype object): " + Array.from([...new Set(arr2)]);
+            let result = {};
 
-            // Solution 3
+            arr2.map(val => {
+                if (result[val] == undefined) {
+                    result[val] = 1;
+                } else {
+                    result[val] += 1;
+                }
+            })
+            document.getElementById("demo2").innerHTML = "Demo 2 (with BigO: n): " + Object.keys(result);
+        }
+
+        function solution3(input) {
             const arr3 = JSON.parse(JSON.stringify(input));
-            var result2 = [];
+            let result2 = [];
             result2.push(arr3[0]);
-            for (var i = 1; i < arr3.length; i++) {
-                var count = 0;
-                var tmp = arr3[i];
+            for (let i = 1; i < arr3.length; i++) {
+                let count = 0;
+                let tmp = arr3[i];
 
-                for (var j = 0; j < result2.length; j++) {
+                for (let j = 0; j < result2.length; j++) {
                     if (result2[j] === tmp) count++;
                 }
 
@@ -84,10 +95,11 @@
             }
 
             document.getElementById("demo3").innerHTML = "Demo 3 (use 2 loops with BigO: n*n): " + result2;
+        }
 
-            // Solution 4
+        function solution4(input) {
             const arr4 = JSON.parse(JSON.stringify(input));
-            var result3 = [];
+            let result3 = [];
 
             arr4.forEach((value, index, array) => {
                 if (result3.indexOf(value) === -1) {
@@ -95,7 +107,22 @@
                 }
             })
 
-            document.getElementById("demo4").innerHTML = "Demo 4 (use arr.forEach() with BigO: 2n): " + result3;
+            document.getElementById("demo4").innerHTML = "Demo 4 (use arr.forEach() with BigO: n*n): " + result3;
+        }
+
+        // Activate function
+        function activateFn(input) {
+            // Solution 1
+            solution1(input);
+
+            // Solution 2
+            solution2(input);
+
+            // Solution 3
+            solution3(input);
+
+            // Solution 4
+            solution4(input);
         }
     </script>
 </body>

@@ -27,12 +27,12 @@
 
     <script>
         // Get input value
-        var inputValue;
-        var input;
+        let inputValue;
+        let input;
         document.getElementById("activateJS").onclick = function() {
             inputValue = document.getElementById("input").value;
-            var getElements = inputValue.split(",");
-            var parseElements = getElements.map(val => {
+            let getElements = inputValue.split(",");
+            let parseElements = getElements.map(val => {
                 return parseInt(val);
             })
 
@@ -43,20 +43,19 @@
             }, [])
 
             // console.log(input);
-            runNow(input);
+            activateFn(input);
         }
 
-        function runNow(input) {
-            // Case 1: Don't have same maximum number of iterations
+        function case1(input) {
             const arr1 = JSON.parse(JSON.stringify(input));
-            var result1 = 0;
-            var count1 = 0;
+            let result1 = 0;
+            let count1 = 0;
 
-            var tmp1 = [];
+            let tmp1 = [];
             arr1.forEach((value, index, array) => {
-                var tmpcnt = 0;
+                let tmpcnt = 0;
                 if (tmp1.indexOf(value) === -1) {
-                    for (var i = 0; i < arr1.length; i++) {
+                    for (let i = 0; i < arr1.length; i++) {
                         if (value === arr1[i]) tmpcnt++;
                     }
 
@@ -67,8 +66,8 @@
                 }
             })
 
-            var max = tmp1[0];
-            for (var i = 0; i < tmp1.length; i++) {
+            let max = tmp1[0];
+            for (let i = 0; i < tmp1.length; i++) {
                 if (tmp1[i].count > max.count) {
                     max = tmp1[i];
                 }
@@ -77,17 +76,18 @@
             result1 = max.num;
             count1 = max.count;
 
-            document.getElementById("demo1").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result1 + " --- The repititions: " + count1;
+            document.getElementById("demo1").innerHTML = "BigO: n*n <br/>" + "The most repititive number: " + result1 + " --- The repititions: " + count1;
+        }
 
-            // Case 2: Have same maximum number of iterations
+        function case2(input) {
             const arr2 = JSON.parse(JSON.stringify(input));
-            var result2 = [];
-            var count2 = 0;
+            let result2 = [];
+            let count2 = 0;
 
-            var tmp2 = [];
+            let tmp2 = [];
             arr2.forEach((val) => {
-                var tmpcnt = 0;
-                for (var i = 0; i < arr2.length; i++) {
+                let tmpcnt = 0;
+                for (let i = 0; i < arr2.length; i++) {
                     if (arr2[i] === val)
                         tmpcnt++;
                 }
@@ -100,7 +100,7 @@
                 }
             })
 
-            var tmp3 = [];
+            let tmp3 = [];
             tmp2.forEach(val => {
                 if (val.count === count2) tmp3.push(val.num);
             })
@@ -109,7 +109,41 @@
                 if (result2.indexOf(val) === -1) result2.push(val);
             })
 
-            document.getElementById("demo2").innerHTML = "BigO: 2n*n <br/>" + "The most repititive number: " + result2 + " --- The repititions: " + count2;
+            document.getElementById("demo2").innerHTML = "BigO: n*n <br/>" + "The most repititive number: " + result2 + " --- The repititions: " + count2;
+        }
+
+        function case3(input) {
+            const arr3 = JSON.parse(JSON.stringify(input));
+            let result3 = {};
+            let count3 = 0;
+
+            arr3.map(val => {
+                if (result3[val] == undefined) {
+                    result3[val] = 1;
+                } else {
+                    result3[val] += 1;
+                    if (result3[val] > count3) count3 = result3[val];
+                }
+            })
+
+            let finalRs = [];
+            for (let key of Object.keys(result3)) {
+                if (result3[key] === count3)
+                    finalRs.push(key)
+            }
+            document.getElementById("demo2").innerHTML = "BigO: n <br/>" + "The most repititive number: " + finalRs + " --- The repititions: " + count3;
+        }
+
+        // Activate function
+        function activateFn(input) {
+            // Case 1: Don't have same maximum number of iterations
+            case1(input);
+
+            // Case 2: Have same maximum number of iterations
+            case2(input);
+
+            // Case 3: Have same maximum number of iterations but BigO n
+            case3(input);
         }
     </script>
 </body>

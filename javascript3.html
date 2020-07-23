@@ -17,9 +17,6 @@
             What is your name?
         </p>
         <div id="answers">
-            <input class="answer" type="checkbox" value="Nam" disabled/>
-            <input class="answer" type="checkbox" value="Tran" disabled/>
-            <input class="answer" type="checkbox" value="Hao" disabled/>
         </div>
     </div>
 
@@ -30,24 +27,22 @@
 
     <script src="data.js"></script>
     <script>
-        var arrAns;
-
         // Set question
         function setQuestion(val) {
             if (!val) {
                 document.getElementById("question").innerHTML = data[0].question;
-                var answers = "";
+                let answers = "";
                 data[0].answers.forEach(val => {
                     answers += '<input id="answer' + val.a_id + '" class="answer" type="text" name="' + val.affect + '" value="' + val.answer + '" disabled/>'
                 })
                 document.getElementById("answers").innerHTML = answers;
 
-                arrAns = document.getElementsByClassName("answer");
-                for (var i = 0; i < arrAns.length; i++) {
-                    arrAns[i].onselect = function() {
+                const arrAns = Array.from(document.getElementsByClassName("answer"));
+                arrAns.forEach(val => {
+                    val.onselect = function() {
                         setQuestion(this);
                     }
-                };
+                });
             } else {
                 if (val.name === "0") {
                     document.getElementById("question").innerHTML = "No more question, okay ?!?";
@@ -58,10 +53,10 @@
                         setQuestion(this)
                     };
                 } else {
-                    for (var i = 0; i < data.length; i++) {
+                    for (let i = 0; i < data.length; i++) {
                         if (data[i].id === parseInt(val.name)) {
                             document.getElementById("question").innerHTML = data[i].question;
-                            var answers = "";
+                            let answers = "";
                             data[i].answers.forEach(val => {
                                 answers += '<input id="answer' + val.a_id + '" class="answer" type="text" name="' + val.affect + '" value="' + val.answer + '" disabled/>'
                             })
@@ -71,25 +66,17 @@
                         }
                     }
 
-                    arrAns = document.getElementsByClassName("answer");
-                    for (var i = 0; i < arrAns.length; i++) {
-                        arrAns[i].onselect = function() {
+                    const arrAns = Array.from(document.getElementsByClassName("answer"));
+                    arrAns.forEach(val => {
+                        val.onselect = function() {
                             setQuestion(this);
                         }
-                    };
+                    });
                 }
             }
         }
 
         setQuestion();
-
-        // Start game
-        /* arrAns = document.getElementsByClassName("answer");
-        for (var i = 0; i < arrAns.length; i++) {
-            arrAns[i].onselect = function() {
-                setQuestion(this);
-            }
-        }; */
     </script>
 </body>
 
