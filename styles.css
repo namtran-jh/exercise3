@@ -75,3 +75,10 @@ a:hover {
     width: 700px;
     text-align: justify;
 }
+
+#javascript {
+    color: black;
+    text-align: justify;
+    font-size: 26px;
+    font-weight: lighter;
+}
