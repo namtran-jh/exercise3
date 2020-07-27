@@ -119,21 +119,29 @@
             let result3 = {};
             let count3 = 0;
 
+            const oneLoop = [];
             arr3.map(val => {
                 if (result3[val] == undefined) {
                     result3[val] = 1;
                 } else {
                     result3[val] += 1;
-                    if (result3[val] > count3) count3 = result3[val];
+                    if (result3[val] > count3) {
+                        oneLoop.length = 0;
+                        count3 = result3[val];
+                        oneLoop.push(val);
+                    }
+                    if (result3[val] === count3 && !oneLoop.includes(val)) oneLoop.push(val);
                 }
             })
 
-            let finalRs = [];
-            for (let key of Object.keys(result3)) {
-                if (result3[key] === count3)
-                    finalRs.push(key)
-            }
-            document.getElementById("demo2").innerHTML = "BigO: n <br/>" + "The most repititive number: " + finalRs + " --- The repititions: " + count3;
+            // console.log(oneLoop.sort())
+
+            // let finalRs = [];    
+            // for (let key of Object.keys(result3)) {
+            //     if (result3[key] === count3)
+            //         finalRs.push(key)
+            // }
+            document.getElementById("demo2").innerHTML = "BigO: n <br/>" + "The most repititive number: " + oneLoop.sort() + " --- The repititions: " + count3;
         }
 
         // Activate function
